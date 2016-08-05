@@ -5,6 +5,8 @@ import styles from './home.scss' // eslint-disable-line no-unused-vars
 
 import * as homeActions from './actions'
 
+import Button from 'progressive-web-sdk/dist/components/button'
+
 class Home extends React.Component {
     componentDidMount() {
         this.props.fetchHomeContents()
@@ -21,6 +23,7 @@ class Home extends React.Component {
                 </Link>
                 <div>
                     This is the title of the home page: {this.props.home.get('title')}
+                    <Button>Test 2</Button>
                 </div>
             </div>
         )
