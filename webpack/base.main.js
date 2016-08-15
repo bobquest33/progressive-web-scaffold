@@ -40,17 +40,9 @@ module.exports = {
             {
                 name: 'babel-loader',
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
+                include: path.resolve(__dirname, '../app'),
                 loaders: [
-                    'babel'
-                ],
-                cacheDirectory: `${__dirname}/tmp`
-            },
-            {
-                name: 'progressive-sdk-loader',
-                test: /node_modules\/progressive-web-sdk\/.*\.jsx?$/,
-                loaders: [
-                    'babel'
+                    'react-hot', 'babel'
                 ],
                 cacheDirectory: `${__dirname}/tmp`
             },
