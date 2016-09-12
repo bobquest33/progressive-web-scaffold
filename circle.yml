@@ -3,7 +3,10 @@ machine:
         version: 4.4.7
 test:
     override:
-        - npm run test:all
+        - npm run lint
+        - npm test -- --runInBand
+    post:
+        - cp -R coverage/* $CIRCLE_ARTIFACTS
 experimental:
     notify:
         branches:
