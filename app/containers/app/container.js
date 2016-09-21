@@ -7,16 +7,31 @@ import {IconSprite} from 'progressive-web-sdk/dist/components/icon'
 
 import {addLocaleData, FormattedDate, FormattedMessage, IntlProvider} from 'react-intl'
 import en from 'react-intl/locale-data/en'
-import ar from 'react-intl/locale-data/ar'
+import fr from 'react-intl/locale-data/fr'
 
-const dict = {
-    'app.goodbye': 'Goodbye {name} :\'('
+const messages = {
+    'en-US': {
+        'app.goodbye': 'Goodbye {name} :\'('
+    },
+    'fr': {
+        'app.goodbye': 'Au Revoir {name} :\'('
+    }
 }
 
 class App extends React.Component {
 
+    constructor() {
+        super()
+
+        this.state = {
+            locale: navigator.language
+        }
+
+        this.changeLocale = this.changeLocale.bind(this)
+    }
+
     componentWillMount() {
-        addLocaleData([...en, ...ar])
+        addLocaleData([...en, ...fr])
     }
 
     componentDidMount() {
@@ -24,17 +39,23 @@ class App extends React.Component {
         // Dispatch an action to retrieve global content here
     }
 
+    changeLocale(event) {
+        this.setState({
+            locale: event.target.value
+        })
+    }
+
     render() {
         let currentTemplate = `t-${this.props.children.props.route.routeName}`
 
         return (
-            <IntlProvider locale="ar" messages={dict}>
+            <IntlProvider locale={this.state.locale} messages={messages[this.state.locale]}>
                 <div id="outer-container" className="t-app">
                     <IconSprite />
 
                     <main id="page-wrap" className={currentTemplate}>
                         <header>
-                            Date:
+                            <strong>Date: </strong>
                             <FormattedDate
                                 value={new Date()}
                                 year='numeric'
@@ -48,6 +69,14 @@ class App extends React.Component {
                             id="app.goodbye"
                             values={{name: 'mike'}}
                             />
+
+                        <div>
+                            <label>Language:</label>
+                            <select onChange={this.changeLocale} defaultValue={this.state.locale}>
+                                <option value="en-US">English</option>
+                                <option value="fr">French</option>
+                            </select>
+                        </div>
 
                         <div id="content">
                             {this.props.children}
