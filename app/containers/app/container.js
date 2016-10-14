@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {hidePreloader} from 'progressive-web-sdk/dist/preloader'
 import {IconSprite} from 'progressive-web-sdk/dist/components/icon'
+import SkipLinks from '../../components/skip-links'
 
 // import * as appActions from './actions'
 
@@ -50,11 +51,12 @@ class App extends React.Component {
 
         return (
             <IntlProvider locale={this.state.locale} messages={messages[this.state.locale]}>
-                <div id="outer-container" className="t-app">
+                <div id="app" className="t-app">
                     <IconSprite />
+                    <SkipLinks />
 
-                    <main id="page-wrap" className={currentTemplate}>
-                        <header>
+                    <div id="app-wrap" className={currentTemplate}>
+                        <header id="app-header" role="banner">
                             <strong>Date: </strong>
                             <FormattedDate
                                 value={new Date()}
@@ -63,29 +65,31 @@ class App extends React.Component {
                                 day='numeric'
                                 weekday='long'
                             />
-                        </header>
 
-                        <FormattedMessage
-                            id="app.goodbye"
-                            values={{name: 'mike'}}
+                            <button id="app-navigation">Menu</button>
+
+                            <FormattedMessage
+                                id="app.goodbye"
+                                values={{name: 'mike'}}
                             />
 
-                        <div>
-                            <label>Language:</label>
-                            <select onChange={this.changeLocale} defaultValue={this.state.locale}>
-                                <option value="en-US">English</option>
-                                <option value="fr">French</option>
-                            </select>
-                        </div>
+                            <div>
+                                <label>Language:</label>
+                                <select onChange={this.changeLocale} defaultValue={this.state.locale}>
+                                    <option value="en-US">English</option>
+                                    <option value="fr">French</option>
+                                </select>
+                            </div>
+                        </header>
 
-                        <div id="content">
+                        <main id="app-main" role="main">
                             {this.props.children}
-                        </div>
+                        </main>
 
-                        <footer>
+                        <footer id="app-footer" role="contentinfo">
                             Footer content
                         </footer>
-                    </main>
+                    </div>
                 </div>
             </IntlProvider>
         )
