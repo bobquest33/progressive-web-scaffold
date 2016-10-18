@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
+import {injectIntl} from 'react-intl'
 
 import Link from 'progressive-web-sdk/dist/components/link'
 import Button from 'progressive-web-sdk/dist/components/button'
@@ -34,6 +35,8 @@ class Home extends React.Component {
     }
 
     render() {
+        const intl = this.props.intl
+
         return (
             <div>
                 <Logo />
@@ -58,7 +61,8 @@ class Home extends React.Component {
                 <Button onClick={this.triggerTapEvent}>Themed Component</Button>
 
                 <div id="realContent">
-                    <p>Real Main content!</p>
+                    {/* An example of injecting strings directly into the app */}
+                    <p>{intl.formatMessage({id: 'home.main-content'})}</p>
                 </div>
             </div>
         )
@@ -67,7 +71,8 @@ class Home extends React.Component {
 
 Home.propTypes = {
     fetchHomeContents: PropTypes.func.isRequired,
-    home: PropTypes.object.isRequired
+    home: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -85,4 +90,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home)
+)(injectIntl(Home))

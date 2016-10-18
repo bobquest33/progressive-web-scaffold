@@ -29,7 +29,7 @@ class App extends React.Component {
         } = this.props
 
         return (
-            <IntlProvider defaltLocale="en-US" locale={locale} messages={messages}>
+            <IntlProvider defaltLocale="en-US" locale={locale} messages={messages} key={locale}>
                 <div id="app" className="t-app">
                     <IconSprite />
                     <SkipLinks />
