@@ -10,9 +10,15 @@ const isReactRoute = () => {
     return ReactRegexes.some((regex) => regex.test(window.location.pathname))
 }
 
+const getLocales = (locales) => locales.map((loc) => `Intl.~locale.${loc}`).join(',')
+
 initCacheManifest(cacheHashManifest)
 
 const CAPTURING_CDN = '//cdn.mobify.com/capturejs/capture-latest.min.js'
+const SUPPORTED_LOCALES = [
+    'en-US',
+    'fr'
+]
 
 import preloadHTML from 'raw!./preloader/preload.html'
 import preloadCSS from 'css?minimize!./preloader/preload.css'
@@ -39,6 +45,14 @@ if (isReactRoute()) {
         rel: 'stylesheet',
         type: 'text/css'
     })
+
+    // Load the intl polyfill for non-supported browsers for use with react-intl
+    if (!window.Intl) {
+        loadAsset('script', {
+            src: `https://cdn.polyfill.io/v2/polyfill.min.js?features=${getLocales(SUPPORTED_LOCALES)}`,
+            type: 'text/javascript'
+        })
+    }
 
     const script = document.createElement('script')
     script.id = 'progressive-web-script'
