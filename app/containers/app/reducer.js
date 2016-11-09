@@ -4,7 +4,7 @@ import _messages from '../../config/translations'
 import * as appActions from './actions'
 
 const messages = fromJS(_messages)
-const locale = window.navigator.language
+const locale = window.navigator.language.toLowerCase()
 const initialState = Map({
     locale,
     messages: messages.get(locale)

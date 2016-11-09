@@ -1,5 +1,5 @@
 const translations = {
-    'en-US': {
+    'en-us': {
         'app.goodbye': 'Goodbye {name} :\'(',
         'home.main-content': 'Real Main content!'
     },

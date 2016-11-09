@@ -16,7 +16,7 @@ initCacheManifest(cacheHashManifest)
 
 const CAPTURING_CDN = '//cdn.mobify.com/capturejs/capture-latest.min.js'
 const SUPPORTED_LOCALES = [
-    'en-US',
+    'en-us',
     'fr'
 ]
 
