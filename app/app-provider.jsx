@@ -4,6 +4,7 @@ import {triggerMobifyPageView} from 'progressive-web-sdk/dist/analytics'
 import {Provider} from 'react-redux'
 import * as appActions from './containers/app/actions'
 import {getComponentName} from './utils/utils'
+import Astro from './vendor/astro-client'
 
 // Containers
 import App from './containers/app/container'
@@ -47,6 +48,9 @@ const AppProvider = ({store}) => {
         const nextURL = getURL(nextState)
 
         if (nextURL !== prevURL) {
+            Astro.trigger('pwa-navigate', {
+                url: nextURL
+            })
             dispatchRouteChanged(nextState)
             dispatchFetchPage(nextState)
         }
