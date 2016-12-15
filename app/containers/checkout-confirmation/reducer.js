@@ -3,9 +3,9 @@ import Immutable from 'immutable'
 import * as checkoutConfirmationActions from './actions'
 
 const initialState = Immutable.fromJS({
-    body: '',
     contentsLoaded: true,
-    testText: 'Confirmation'
+    emailAddress: 'mlenton@mobify.com',
+    orderNumber: '000000005'
 })
 
 export default createReducer({
