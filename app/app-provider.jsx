@@ -56,9 +56,11 @@ const AppProvider = ({store}) => {
         const nextURL = getURL(nextState)
 
         if (nextURL !== prevURL) {
-            Astro.trigger('pwa-navigate', {
-                url: nextURL
-            })
+            if (nextState.location.action.toLowerCase() !== 'pop' && Astro.isRunningInApp()) {
+                Astro.trigger('pwa-navigate', {
+                    url: nextURL
+                })
+            }
             dispatchRouteChanged(nextState)
             if (shouldFetchPage(nextState)) {
                 dispatchFetchPage(nextState)
