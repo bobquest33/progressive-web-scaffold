@@ -43,6 +43,21 @@ CartModalController.init = async function() {
         navigationView.back()
     })
 
+    const headerBarData = {
+        header: {
+            rightIcon: {
+                id: 'close',
+                imageUrl: 'file:///close.png'
+            }
+        }
+    }
+
+    navigationView.disableDefaultNavigationHandler()
+    navigationView.on('navigate', (params) => {
+        console.log('TAGTAG')
+        navigationView.navigateToUrl(params.url, headerBarData, {})
+    })
+
     return cartModalController
 }
 
