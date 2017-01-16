@@ -55,6 +55,10 @@ TabController.init = async function(tabItem) {
         disableLoader: []
     }
 
+    navigationView.on('navigate', () => {
+        navigationView.navigateToUrl('https://google.ca', {}, {})
+    })
+
     return new TabController(tabItem, layout, headerBar, navigationView)
 }
 
