@@ -14,7 +14,7 @@ class Onboarding extends Component {
             return <OnboardingScreen data={data} index={index} isLast={index === carouselData.length - 1}/>
         })
         return (
-            <Carousel>
+            <Carousel moveThreshold="50">
                 {carouselItems}
             </Carousel>
         )

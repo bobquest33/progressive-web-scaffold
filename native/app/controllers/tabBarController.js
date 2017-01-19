@@ -62,4 +62,16 @@ TabBarController.prototype.getActiveController = function() {
     return this._tabControllers[this.activeTabId]
 }
 
+TabBarController.prototype.backActiveItem = function() {
+    if (this.canGoBack()) {
+        const activeTab = this.getActiveController()
+        activeTab.back()
+    }
+}
+
+TabBarController.prototype.canGoBack = function() {
+    const activeTab = this.getActiveController()
+    return activeTab.canGoBack()
+}
+
 export default TabBarController
