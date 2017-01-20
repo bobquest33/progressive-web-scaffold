@@ -3,6 +3,7 @@ import Promise from 'bluebird'
 import AnchoredLayoutPlugin from 'progressive-app-sdk/plugins/anchoredLayoutPlugin'
 import HeaderBarPlugin from 'progressive-app-sdk/plugins/headerBarPlugin'
 import NavigationPlugin from 'progressive-app-sdk/plugins/navigationPlugin'
+import Application from 'progressive-app-sdk/application'
 
 import baseConfig from '../config/baseConfig'
 
@@ -93,9 +94,15 @@ TabController.prototype.canGoBack = async function() {
     return await this.navigationView.canGoBack()
 }
 
-TabController.prototype.back = function() {
-    console.log('Navigationview back')
-    this.navigationView.back()
+TabController.prototype.back = async function() {
+    const webView = await this.navigationView.getTopPlugin()
+    const canGoBack = await webView.canGoBack()
+    if (canGoBack) {
+        webView.back()
+    } else {
+        Application.closeApp()
+    }
+
 }
 
 export default TabController
