@@ -19,6 +19,7 @@ import CheckoutPayment from './containers/checkout-payment/container'
 import CheckoutConfirmation from './containers/checkout-confirmation/container'
 import CheckoutHeader from './containers/checkout-header/container'
 import CheckoutFooter from './containers/checkout-footer/container'
+import Onboarding from './containers/onboarding/container'
 
 const AppProvider = ({store}) => {
     /**
@@ -110,6 +111,9 @@ const AppProvider = ({store}) => {
                     <Route component={CheckoutShipping} path="checkout/shipping/" routeName="checkingShipping" fetchPage="false" Header={CheckoutHeader} Footer={CheckoutFooter} />
                     <Route component={CheckoutPayment} path="checkout/payment/" routeName="checkingPayment" fetchPage="false" Header={CheckoutHeader} Footer={CheckoutFooter} />
                     <Route component={CheckoutConfirmation} path="checkout/confirmation/" routeName="checkingConfirmation" fetchPage="false" Header={CheckoutHeader} Footer={CheckoutFooter} />
+                </Route>
+                <Route path="/native/" component={App} onEnter={onEnter} onChange={onChange}>
+                    <Route component={Onboarding} path="onboarding" routeName="onboarding" />
                 </Route>
             </Router>
         </Provider>
